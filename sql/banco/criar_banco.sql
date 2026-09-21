@@ -1,0 +1,129 @@
+CREATE DATABASE LocadoraIfti;
+GO
+
+USE LocadoraIfti;
+GO
+
+CREATE TABLE Filial (
+	Id INT IDENTITY,
+	RazaoSocial VARCHAR(200) NOT NULL,
+	CNPJ CHAR(14) NOT NULL,
+	Telefone VARCHAR(15) NOT NULL,
+	Email VARCHAR(255) NOT NULL,
+	Logradouro VARCHAR(200) NOT NULL,
+	Numero VARCHAR(10) NOT NULL,
+	Bairro VARCHAR(50) NOT NULL,
+	Cidade VARCHAR(50) NOT NULL,
+	UF CHAR(2) NOT NULL,
+
+	CONSTRAINT PK_IdFilial PRIMARY KEY (Id)
+);
+
+CREATE TABLE CategoriaVeiculo (
+	Id INT IDENTITY,
+	Nome VARCHAR(30) NOT NULL,
+	ValorDiaria DECIMAL(10, 2) NOT NULL,
+
+	CONSTRAINT PK_IdCategoriaVeiculo PRIMARY KEY (Id)
+);
+
+CREATE TABLE StatusVeiculo (
+	Id TINYINT IDENTITY,
+	Nome VARCHAR(30) NOT NULL,
+
+	CONSTRAINT PK_IdStatusVeiculo PRIMARY KEY (Id)
+);
+
+CREATE TABLE StatusAluguel (
+	Id TINYINT IDENTITY,
+	Nome VARCHAR(30) NOT NULL,
+
+	CONSTRAINT PK_IdStatusAluguel PRIMARY KEY (Id)
+);
+
+CREATE TABLE TipoPagamento (
+	Id TINYINT IDENTITY,
+	Nome VARCHAR(30) NOT NULL,
+
+	CONSTRAINT PK_IdTipoPagamento PRIMARY KEY (Id)
+);
+
+CREATE TABLE StatusPagamento (
+	Id TINYINT IDENTITY,
+	Nome VARCHAR(30) NOT NULL,
+
+	CONSTRAINT PK_IdStatusPagamento PRIMARY KEY (Id)
+);
+
+CREATE TABLE Veiculo (
+	Id INT IDENTITY,
+	IdCategoria INT NOT NULL,
+	IdFilial INT NOT NULL,
+	IdStatusVeiculo TINYINT NOT NULL,
+	Marca VARCHAR(40) NOT NULL,
+	Modelo VARCHAR(40) NOT NULL,
+	Placa CHAR(7) NOT NULL,
+	AnoFabricacao SMALLINT NOT NULL,
+	Cor VARCHAR(20) NOT NULL,
+
+	CONSTRAINT PK_IdVeiculo PRIMARY KEY (Id),
+	CONSTRAINT FK_IdCategoria_Veiculo FOREIGN KEY (IdCategoria) REFERENCES CategoriaVeiculo (Id),
+	CONSTRAINT FK_IdFilial_Veiculo FOREIGN KEY (IdFilial) REFERENCES Filial (Id),
+	CONSTRAINT FK_IdStatusVeiculo_Veiculo FOREIGN KEY (IdStatusVeiculo) REFERENCES StatusVeiculo (Id)
+);
+
+CREATE TABLE Cliente (
+	Id INT IDENTITY,
+	Nome VARCHAR(100) NOT NULL,
+	CPF CHAR(11) NOT NULL,
+	Telefone VARCHAR(15) NOT NULL,
+	Email VARCHAR(255) NOT NULL,
+
+	CONSTRAINT PK_IdCliente PRIMARY KEY (Id)
+);
+
+CREATE TABLE Aluguel (
+	Id INT IDENTITY,
+	IdVeiculo INT NOT NULL,
+	IdCliente INT NOT NULL,
+	IdFilial INT NOT NULL,
+	IdStatusAluguel TINYINT NOT NULL,
+	DataRetirada DATETIME NOT NULL,
+	DataDevolucaoPrevista DATETIME NOT NULL,
+	DataDevolucaoReal DATETIME NULL,
+	ValorTotal DECIMAL(10, 2) NOT NULL,
+	ValorMulta DECIMAL(10, 2) NULL,
+
+	CONSTRAINT PK_IdAluguel PRIMARY KEY (Id),
+	CONSTRAINT FK_IdVeiculo_Aluguel FOREIGN KEY (IdVeiculo) REFERENCES Veiculo (Id),
+	CONSTRAINT FK_IdCliente_Aluguel FOREIGN KEY (IdCliente) REFERENCES Cliente (Id),
+	CONSTRAINT FK_IdFilial_Aluguel FOREIGN KEY (IdFilial) REFERENCES Filial (Id),
+	CONSTRAINT FK_IdStatusAluguel_Aluguel FOREIGN KEY (IdStatusAluguel) REFERENCES StatusAluguel (Id)
+);
+
+CREATE TABLE Pagamento (
+	Id INT IDENTITY,
+	IdAluguel INT NOT NULL,
+	IdTipoPagamento TINYINT NOT NULL,
+	IdStatusPagamento TINYINT NOT NULL,
+	DataPagamento DATETIME NOT NULL,
+	ValorPago DECIMAL(10, 2) NOT NULL,
+
+	CONSTRAINT PK_IdPagamento PRIMARY KEY (Id),
+	CONSTRAINT FK_IdAluguel_Pagamento FOREIGN KEY (IdAluguel) REFERENCES Aluguel (Id),
+	CONSTRAINT FK_IdTipoPagamento_Pagamento FOREIGN KEY (IdTipoPagamento) REFERENCES TipoPagamento (Id),
+	CONSTRAINT FK_IdStatusPagamento_Pagamento FOREIGN KEY (IdStatusPagamento) REFERENCES StatusPagamento (Id)
+);
+
+
+--ALTER TABLE Cliente
+--ADD CNH VARCHAR(11) NULL;
+
+ALTER TABLE Filial
+ADD SiteFilial VARCHAR(255) NULL;
+
+ALTER TABLE Veiculo
+ALTER COLUMN Modelo VARCHAR(60) NOT NULL;
+
+ALTER TABLE Pagamento
+ALTER COLUMN ValorPago DECIMAL(10, 2) NOT NULL;
