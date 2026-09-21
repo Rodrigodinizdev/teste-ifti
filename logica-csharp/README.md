@@ -2,8 +2,10 @@
 
 ## Branch de entrega
 
+Use a mesma branch dos dois desafios (veja o README geral do repositório):
+
 ```bash
-git checkout -b feat/nome-sobrenome-logica-csharp
+git checkout -b feat/nome-sobrenome
 ```
 
 ## Estrutura da pasta
@@ -11,16 +13,14 @@ git checkout -b feat/nome-sobrenome-logica-csharp
 ```
 logica-csharp/
 ├── README.md
-├── questoes-logica-csharp.md      # enunciado do desafio
-└── respostas/
-    └── nome-sobrenome/
-        ├── Program.cs
-        └── nome-sobrenome.csproj
+└── questoes-logica-csharp.md      # enunciado do desafio
 ```
+
+Sua solução fica em `respostas/nome-sobrenome/desafio-csharp/` (fora da pasta `logica-csharp/`, na raiz do repositório — veja o README geral).
 
 ## Como entregar
 
-Este desafio é **um único programa integrado** (não são questões separadas) — crie a pasta `respostas/nome-sobrenome/` com um projeto Console contendo `Program.cs` e o arquivo de projeto (`nome-sobrenome.csproj`), implementando as 4 partes do enunciado na ordem: Bilheteria → Consolidação do Plantel → Prioridade Veterinária → Relatório Final.
+Este desafio é **um único programa integrado** (não são questões separadas) — em `respostas/nome-sobrenome/desafio-csharp/`, crie um projeto Console com `Program.cs` e o arquivo de projeto (`nome-sobrenome.csproj`), implementando as 4 partes do enunciado na ordem: Bilheteria → Consolidação do Plantel → Prioridade Veterinária → Relatório Final.
 
 O enunciado completo, com exemplo de saída esperada, está em [`questoes-logica-csharp.md`](./questoes-logica-csharp.md).
 
@@ -47,4 +47,4 @@ Registre a evolução em commits por etapa, seguindo as Partes do enunciado:
 
 ## Abrindo o PR
 
-Ao terminar, abra um Pull Request da sua branch `feat/nome-sobrenome-logica-csharp` contra a `main`.
+O PR é único pros dois desafios — veja o README geral do repositório para as instruções de entrega.
