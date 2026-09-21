@@ -1,58 +1,23 @@
-# Prova — Módulo SQL (Locadora de Veículos)
+# Teste IFTI
 
-## Branch de entrega
-
-```bash
-git checkout -b feat/nome-sobrenome-sql
-```
-
-## Estrutura da pasta
-
-```
-sql/
-├── README.md
-├── banco/
-│   ├── criar_banco.sql      # DDL — cria o banco e as tabelas
-│   └── popular_banco.sql    # DML — carga de dados de teste
-├── questoes-sql.md          # enunciado das 10 questões
-└── respostas/
-    └── nome-sobrenome/
-        ├── Q1.sql
-        ├── Q2.sql
-        ├── ...
-        └── Q10.sql
-```
+Este repositório contém as duas provas do processo: **SQL Server** e **Lógica C#**.
 
 ## Antes de começar
 
-Execute, **nesta ordem**, os scripts da pasta `banco/`:
+Clone o repositório e crie sua branch de entrega, uma para cada assunto, seguindo o padrão `feat/nome-sobrenome-<assunto>`:
 
-1. `banco/criar_banco.sql` — cria o banco e as tabelas.
-2. `banco/popular_banco.sql` — insere a massa de dados sobre a qual as consultas serão validadas.
+- SQL: `feat/nome-sobrenome-sql`
+- Lógica C#: `feat/nome-sobrenome-logica-csharp`
 
-Não altere os scripts da pasta `banco/`.
+Exemplo (Rodrigo Diniz): `feat/rodrigo-diniz-sql` e `feat/rodrigo-diniz-logica-csharp`.
 
-## Como entregar
+## Onde encontrar cada prova
 
-Crie a pasta `respostas/nome-sobrenome/` e **um arquivo por questão** (`Q1.sql`, `Q2.sql`, ..., `Q10.sql`), cada um contendo o comando SQL correspondente.
+- Instruções e enunciado de SQL: [`sql/README.md`](./sql/README.md)
+- Instruções e enunciado de Lógica C#: [`logica-csharp/README.md`](./logica-csharp/README.md)
 
-As questões seguem o fluxo de implementação: primeiro a estrutura da nova tabela (`Reserva`), depois os dados dessa tabela e, por último, as consultas.
+## Regras gerais
 
-- **Q1 a Q5**: execute em ordem — cada uma depende da anterior.
-- **Q6 a Q10**: consultas (DQL), podem ser resolvidas em qualquer ordem.
-
-O enunciado completo está em [`questoes-sql.md`](./questoes-sql.md).
-
-## Commits
-
-Registre a evolução em três commits na sua branch:
-
-| Etapa | Mensagem |
-|---|---|
-| Após Q1 e Q2 (DDL) | `feat: Adiciona estrutura DDL de SQL` |
-| Após Q3 a Q5 (DML) | `feat: Adiciona operacoes DML de SQL` |
-| Após Q6 a Q10 (DQL) | `feat: Adiciona consultas DQL de SQL` |
-
-## Abrindo o PR
-
-Ao terminar, abra um Pull Request da sua branch `feat/nome-sobrenome-sql` contra a `main`.
+- Cada pessoa trabalha **somente na própria branch**.
+- Não é permitido push direto na `main`.
+- Ao terminar cada prova, abra um Pull Request da sua branch contra a `main`.
