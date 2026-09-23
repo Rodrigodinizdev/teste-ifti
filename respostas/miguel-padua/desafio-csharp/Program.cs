@@ -162,9 +162,50 @@ Console.WriteLine("=== BILHETERIA ===");
 
 // --- PARTE 2: CONSOLIDACAO DO PLANTEL ---
 string[] sistemaAntigo = { "BICA-014", "BICA-002", "BICA-014", "BICA-030" };
-List<string> sistemaNovo = new List<string> { "BICA-030", "BICA-055", "XX-009" };
-// TODO: cadastro unico, sem duplicados, ordenado
-// TODO: validar prefixo, contar validos/invalidos, tratar cadastro vazio
+List<string> sistemaNovo = new List<string> { "BICA-030", "BICA-055", "XX-009"}; 
+List<string> todosOsCodigos = new List<string> {};
+
+todosOsCodigos.AddRange(sistemaAntigo);
+todosOsCodigos.AddRange(sistemaNovo);
+
+List<string> codigosValidos = new List<string> {};
+List<string> codigosInvalidos = new List<string> {};
+
+foreach (string codigo in todosOsCodigos)
+{
+    if (codigo.StartsWith("BICA-"))
+    {
+        if (!codigosValidos.Contains(codigo))
+        {
+        codigosValidos.Add(codigo);
+        }
+    }
+    else
+    {
+        if (!codigosInvalidos.Contains(codigo))
+        {
+            codigosInvalidos.Add(codigo);
+        }
+    }
+}
+
+codigosValidos.Sort();
+
+if (codigosValidos.Count == 0)
+{
+    Console.WriteLine("Não há nada para auditar.");
+}
+else
+{
+    foreach (string codigo in codigosValidos)
+    {
+        Console.WriteLine(codigo);
+    }
+
+    Console.WriteLine($"Codigos validos: {codigosValidos.Count}");
+    Console.WriteLine($"Codigos invalidos: {codigosInvalidos.Count}");
+}
+
 
 // --- PARTE 3: PRIORIDADE VETERINARIA ---
 List<string> animaisMonitorados = new List<string> { "Leao Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
