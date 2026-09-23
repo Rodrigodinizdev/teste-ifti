@@ -167,15 +167,41 @@ else
 Console.WriteLine(@$"
 Codigos unicos no cadastro: {sistemaUnico.Count}
 Codigos validos: {codigosValidos.Count}
-Codigos invalidos: {codigosInvalidos.Count}
-");
+Codigos invalidos: {codigosInvalidos.Count}");
 
 // --- PARTE 3: PRIORIDADE VETERINARIA ---
 List<string> animaisMonitorados = new List<string> { "Leao Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
 List<int> diasSemCheckup = new List<int> { 45, 120, 10, 95 };
 string[] especiesSensiveis = { "Onça Preta", "Arara Bela" };
 // TODO: classificar cada animal (Urgente/Rotina)
+List<String> statusCheckup = new List<string>();
+
+for (int i = 0; i < animaisMonitorados.Count; i++)
+{
+  if (diasSemCheckup[i] > 90 || (diasSemCheckup[i] > 30 && animaisMonitorados[i] == especiesSensiveis[i]))
+  {
+    statusCheckup.Add("Urgente");
+  }
+  else
+  {
+    statusCheckup.Add("Rotina");
+  }
+}
+
+Console.WriteLine("\n=== PRIORIDADE VETERINARIA ===");
+for (int i = 0; i < animaisMonitorados.Count; i++)
+{
+  Console.WriteLine($"{animaisMonitorados[i]}: {diasSemCheckup[i]} dias sem checkup - {statusCheckup[i]}");
+}
+
 // TODO: simular checkup de um animal especifico
+string animalSimulacao = "Onça Preta";
+int indexAnimalSimulacao = animaisMonitorados.IndexOf(animalSimulacao);
+diasSemCheckup[indexAnimalSimulacao] = 0;
+
+Console.WriteLine(@$"
+Checkup realizado em: {animalSimulacao}
+Dias sem checkup atualizado: {diasSemCheckup[indexAnimalSimulacao]}");
 
 // --- PARTE 4: RELATORIO FINAL ---
 // TODO: relatorio final em secoes
