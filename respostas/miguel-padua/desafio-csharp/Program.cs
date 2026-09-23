@@ -12,6 +12,10 @@ List<DateTime> MomentoDoPagamento = new List<DateTime> {};
 int quantidadeVisitantes = 0;
 bool quantidadeValida = false;
 
+Console.WriteLine("=== CENTRAL DA BICA VIDA LIVRE ===");
+
+Console.WriteLine("=== BILHETERIA ===");
+
 while (!quantidadeValida)
 {
     Console.Write("Quantos visitantes serão registrados nessa sessão? ");
@@ -31,6 +35,7 @@ for (int i = 1; i <= quantidadeVisitantes; i++)
 {
     Console.WriteLine($"\n--- Visitante {i} ---");
 
+    DateTime momentoAtual = DateTime.Now;
     int idade = 0;
     bool validadeIdade = false;
     while (!validadeIdade)
@@ -133,15 +138,7 @@ for (int i = 1; i <= quantidadeVisitantes; i++)
                 decimal somaDasParcelas = valorDaParcela * numParcelas;
                 decimal diferenca = ValorFinalDoVisitante - somaDasParcelas;
 
-                for (int p = 1; p <= numParcelas; p++)
-                {
-                    decimal valorDessaParcela = valorDaParcela;
-                    if (p == 1)
-                    {
-                        valorDessaParcela = valorDessaParcela + diferenca;
-                    }
-                    Console.WriteLine($"numero da parcela: {p} / Valor dessa parcela: {valorDessaParcela.ToString("C")}");
-                }
+                Console.WriteLine($"Parcelado em {numParcelas}x de {valorDaParcela.ToString("C")}");
             }
         }
         
@@ -152,13 +149,11 @@ for (int i = 1; i <= quantidadeVisitantes; i++)
     categorias.Add(categoria);
     FormasDePagamentos.Add(pagamento);
     ValorFinal.Add(ValorFinalDoVisitante);
-    MomentoDoPagamento.Add(DateTime.Now);
-
+    MomentoDoPagamento.Add(momentoAtual);
+    Console.WriteLine($"Cadastrado em: {momentoAtual.ToString("dd/MM/yyyy HH:mm:ss")}");
 }
 
-Console.WriteLine("=== CENTRAL DA BICA VIDA LIVRE ===");
 
-Console.WriteLine("=== BILHETERIA ===");
 
 // --- PARTE 2: CONSOLIDACAO DO PLANTEL ---
 string[] sistemaAntigo = { "BICA-014", "BICA-002", "BICA-014", "BICA-030" };
@@ -170,6 +165,8 @@ todosOsCodigos.AddRange(sistemaNovo);
 
 List<string> codigosValidos = new List<string> {};
 List<string> codigosInvalidos = new List<string> {};
+
+Console.WriteLine("=== AUDITORIA DO PLANTEL ===");
 
 foreach (string codigo in todosOsCodigos)
 {
@@ -193,7 +190,7 @@ codigosValidos.Sort();
 
 if (codigosValidos.Count == 0)
 {
-    Console.WriteLine("Não há nada para auditar.");
+    Console.WriteLine("Nenhum animal para auditar");
 }
 else
 {
@@ -201,17 +198,19 @@ else
     {
         Console.WriteLine(codigo);
     }
-
+    Console.WriteLine($"Codigos unicos no cadastro: {codigosValidos.Count + codigosInvalidos.Count}");
     Console.WriteLine($"Codigos validos: {codigosValidos.Count}");
     Console.WriteLine($"Codigos invalidos: {codigosInvalidos.Count}");
 }
-
+  
 
 // --- PARTE 3: PRIORIDADE VETERINARIA ---
 List<string> animaisMonitorados = new List<string> { "Leão Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
 List<int> diasSemCheckup = new List<int> { 45, 120, 10, 95 };
 string[] especiesSensiveis = { "Onça Preta", "Arara Bela" };
 List<string> statusAnimais = new List<string> {};
+
+Console.WriteLine("=== PRIORIDADE VETERINÁRIO");
 
 for (int i = 0; i < animaisMonitorados.Count; i++)
 {
@@ -233,13 +232,14 @@ for (int i = 0; i < animaisMonitorados.Count; i++)
 
 }
 
-Console.Write("qual o nome do animal que fez checkup");
+Console.Write("qual o nome do animal que fez checkup: ");
 string nomeDigitado = Console.ReadLine();
 int indice = animaisMonitorados.IndexOf(nomeDigitado);
 if (indice != -1)
 {
     diasSemCheckup[indice] = 0;
-    Console.WriteLine("animal encontrado");
+    Console.WriteLine($"Checkup realizado em: {animaisMonitorados[indice]}");
+    Console.WriteLine($"Dias sem checkup atualizado: {diasSemCheckup[indice]}");
 }
 else
 {
@@ -248,7 +248,32 @@ else
 
 
 // --- PARTE 4: RELATORIO FINAL ---
-// TODO: relatorio final em secoes
+Console.WriteLine("=== RESUMO DO DIA ===");
+
+decimal faturamentoTotal = 0;
+
+foreach (decimal valor in ValorFinal)
+{
+    faturamentoTotal = faturamentoTotal + valor;
+}
+Console.WriteLine($"O total de visitantes atendidos foram de {idades.Count}");
+Console.WriteLine($"Faturamento total: {faturamentoTotal.ToString("C")}");
+Console.WriteLine($"Codigos validados: {codigosValidos.Count}");
+bool existemValidos = codigosValidos.Count > 0;
+Console.WriteLine($"Ha codigos validos para auditoria: {(existemValidos ? "Sim" : "Não")}");
+int totalUrgentes = 0;
+foreach (string status in statusAnimais)
+{
+    if (status == "Urgente")
+    {
+        totalUrgentes = totalUrgentes + 1;
+    }
+}
+Console.WriteLine($"Animais auditados: {animaisMonitorados.Count}");
+Console.WriteLine($"Animais em prioridade urgente: {totalUrgentes}");
+
+
+
 
 enum FormaDePagamento
 {
