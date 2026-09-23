@@ -36,7 +36,7 @@ for (int i = 0; i < quantidadeVisitantes; i++)
   }
 
   string categoria;
-  double valorBase;
+  decimal valorBase;
 
   if (idade >= 65)
   {
@@ -81,7 +81,7 @@ for (int i = 0; i < quantidadeVisitantes; i++)
   }
 
   string formaPagamento;
-  double desconto;
+  decimal desconto;
 
   switch (opcao)
   {
@@ -91,11 +91,11 @@ for (int i = 0; i < quantidadeVisitantes; i++)
       break;
     case 2:
       formaPagamento = "Pix";
-      desconto = -0.05;
+      desconto = -0.05M;
       break;
     case 3:
       formaPagamento = "Credito";
-      desconto = 0.03;
+      desconto = 0.03M;
       break;
     default:
       Console.WriteLine("Erro! Opção de pagamento inexistente.");
@@ -103,7 +103,7 @@ for (int i = 0; i < quantidadeVisitantes; i++)
   }
   Console.WriteLine($"Forma de pagamento: {formaPagamento}");
 
-  double valorFinal = valorBase + (valorBase * desconto);
+  decimal valorFinal = valorBase + (valorBase * desconto);
   Console.WriteLine($"Valor final: {valorFinal:C}");
 
   if (valorFinal > 50 && opcao == 3) Console.WriteLine("Parcelamento em até 3x sem juros disponível!");
@@ -205,5 +205,28 @@ Dias sem checkup atualizado: {diasSemCheckup[indexAnimalSimulacao]}");
 
 // --- PARTE 4: RELATORIO FINAL ---
 // TODO: relatorio final em secoes
+decimal faturamento = 0;
 
-record Venda(int Idade, string Categoria, string FormaPagamento, double ValorFinal, DateTime DataCadastro);
+foreach (Venda venda in vendas)
+{
+  faturamento += venda.ValorFinal;
+}
+
+int quantidadeUrgente = 0;
+
+foreach (string status in statusCheckup)
+{
+  if (status == "Urgente")
+  {
+    quantidadeUrgente += 1;
+  }
+}
+
+Console.WriteLine(@$"
+=== RESUMO DO DIA ===
+Visitantes atendidos: {quantidadeVisitantes}
+Faturamento do dia: {faturamento:C}
+Animais auditados: {animaisMonitorados.Count}
+Animais em prioridade urgente: {quantidadeUrgente}");
+
+record Venda(int Idade, string Categoria, string FormaPagamento, decimal ValorFinal, DateTime DataCadastro);
