@@ -106,7 +106,10 @@ for (int i = 0; i < quantidadeVisitantes; i++)
   decimal valorFinal = valorBase + (valorBase * desconto);
   Console.WriteLine($"Valor final: {valorFinal:C}");
 
-  if (valorFinal > 50 && opcao == 3) Console.WriteLine("Parcelamento em até 3x sem juros disponível!");
+  if (valorFinal > 50 && opcao == 3)
+  {
+    Console.WriteLine($"Parcelado em 3x de {valorFinal / 3:C}");
+  }
 
   DateTime dateNow = DateTime.Now;
   Console.WriteLine($"Cadastrado em: {dateNow}");
@@ -154,7 +157,7 @@ Console.WriteLine("\n=== AUDITORIA DO PLANTEL ===");
 
 if (codigosValidos.Count == 0)
 {
-  Console.WriteLine("Não há nenhum código válido para auditar.");
+  Console.WriteLine("Nenhum animal para auditar");
 }
 else
 {
