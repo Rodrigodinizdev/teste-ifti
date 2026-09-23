@@ -208,11 +208,44 @@ else
 
 
 // --- PARTE 3: PRIORIDADE VETERINARIA ---
-List<string> animaisMonitorados = new List<string> { "Leao Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
+List<string> animaisMonitorados = new List<string> { "Leão Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
 List<int> diasSemCheckup = new List<int> { 45, 120, 10, 95 };
 string[] especiesSensiveis = { "Onça Preta", "Arara Bela" };
-// TODO: classificar cada animal (Urgente/Rotina)
-// TODO: simular checkup de um animal especifico
+List<string> statusAnimais = new List<string> {};
+
+for (int i = 0; i < animaisMonitorados.Count; i++)
+{
+    string nomeDoAnimal = animaisMonitorados[i];
+    int dias = diasSemCheckup[i];
+    bool sensivel = especiesSensiveis.Contains(nomeDoAnimal);
+    
+    string status;
+    if ( dias > 90 || (dias > 30 && sensivel))
+    {
+        status = "Urgente"; 
+    }
+    else
+    {
+        status = "Rotina";
+    }
+    statusAnimais.Add(status);
+    Console.WriteLine($"{nomeDoAnimal} -- {dias} dias sem checkup - {status}");
+
+}
+
+Console.Write("qual o nome do animal que fez checkup");
+string nomeDigitado = Console.ReadLine();
+int indice = animaisMonitorados.IndexOf(nomeDigitado);
+if (indice != -1)
+{
+    diasSemCheckup[indice] = 0;
+    Console.WriteLine("animal encontrado");
+}
+else
+{
+    Console.WriteLine("Animal não encontrado.");
+}
+
 
 // --- PARTE 4: RELATORIO FINAL ---
 // TODO: relatorio final em secoes
