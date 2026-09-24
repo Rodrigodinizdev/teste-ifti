@@ -8,6 +8,7 @@ Console.WriteLine("=== BILHETERIA ===");
 Console.WriteLine();
 
 int quantidadeVisitantes = 0;
+decimal faturamentoDiario = 0.00m;
 bool valorValido = false;
 
 Console.Write("Quantos visitantes serão registrados? ");
@@ -102,6 +103,8 @@ for (int i = 0; i < quantidadeVisitantes; i++)
     };
     Console.WriteLine($"Valor final: {valoresFinaisIngressos[i].ToString("C")}");
 
+    faturamentoDiario += valoresFinaisIngressos[i];
+
     if (valoresFinaisIngressos[i] > 50.00m && formasEscolhidas[i] == FormasPagamento.Credito)
     {
         Console.Write("Você deseja parcelar o valor em até 3x sem juros no cartão? Digite \"sim\" ou \"não\": ");
@@ -180,10 +183,13 @@ else
     Console.WriteLine($"Códigos válidos no cadastro: {codigosValidos}");
     Console.WriteLine($"Códigos inválidos no cadastro: {codigosInvalidos}");
 }
+System.Console.WriteLine();
 
 // --- PARTE 3: PRIORIDADE VETERINARIA ---
 Console.WriteLine("=== PRIORIDADE VETERINÁRIA");
 Console.WriteLine();
+
+int animaisPrioridade = 0;
 
 List<string> animaisMonitorados = new List<string> { "Leao Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
 List<int> diasSemCheckup = new List<int> { 45, 120, 10, 95 };
@@ -196,7 +202,10 @@ for (int i = 0; i < animaisMonitorados.Count(); i++)
     if (diasSemCheckup[i] > 30)
     {
         if (especiesSensiveis.Contains(animaisMonitorados[i]) || diasSemCheckup[i] > 90)
+        {
             Console.Write("- Urgente");
+            animaisPrioridade++;
+        }
         else
             Console.Write("- Rotina");
     } 
@@ -213,6 +222,16 @@ diasSemCheckup[indiceAnimal] = 0;
 
 Console.WriteLine($"Checkup realizado em: {animaisMonitorados[indiceAnimal]}");
 Console.WriteLine($"Dias sem checkup (atualizado): {diasSemCheckup[indiceAnimal]}");
+System.Console.WriteLine();
+
+// --- PARTE 4: RELATORIO FINAL ---
+System.Console.WriteLine("=== RESUMO DO DIA ===");
+System.Console.WriteLine();
+
+System.Console.WriteLine($"Visitantes atendidos: {quantidadeVisitantes}");
+System.Console.WriteLine($"Faturamento do dia: {faturamentoDiario.ToString("C")}");
+System.Console.WriteLine($"Animais auditados: {sistemaUnicos.Count()}");
+System.Console.WriteLine($"Animais em prioridade urgente: {animaisPrioridade}");
 
 enum FormasPagamento
 {
