@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MSHqhl6Qbas=",
+  "success": true,
+  "projectFilePath": "/home/gabrielma-dev/Documents/projects/teste-ifti/respostas/gabriel-moises/desafio-csharp/gabriel-moises.csproj",
+  "expectedPackageFiles": [
+    "/home/gabrielma-dev/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
