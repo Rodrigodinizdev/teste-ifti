@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gabriel-moises")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3efe3e8848b047974c6e69f2918119d5f45ba5c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8bc46c8ce8ec01862cbd9b97b19b019ea3774e07")]
 [assembly: System.Reflection.AssemblyProductAttribute("gabriel-moises")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gabriel-moises")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
