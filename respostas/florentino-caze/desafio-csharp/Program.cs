@@ -120,8 +120,7 @@ for (int i = 0; i < quantidadeVisitantes; i++)
             }
 
             decimal valorParcelado = valoresFinaisIngressos[i] / quantidadeParcelas[i];
-            Console.WriteLine($"Valor final parcelado: {valorParcelado.ToString("C")}");
-            Console.WriteLine($"Quantidade de parcelas: {quantidadeParcelas[i]}");
+            Console.WriteLine($"Parcelado em {quantidadeParcelas[i]}x de {valorParcelado.ToString("C")}");
         }
     }
     else
@@ -170,7 +169,7 @@ for (int i = 0; i < sistemaUnicos.Count(); i++)
 }
 
 if (codigosValidos == 0)
-    Console.WriteLine("O sistema não possui códigos válidos.");
+    Console.WriteLine("Nenhum animal para auditar.");
 else
 {
     foreach (string codigo in sistemaUnicos)
