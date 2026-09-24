@@ -133,6 +133,55 @@ for (int i = 0; i < quantidadeVisitantes; i++)
     Console.WriteLine();
 }
 
+// --- PARTE 2: CONSOLIDACAO DO PLANTEL ---
+Console.WriteLine("=== AUDITORIA DO PLANTEL ===");
+Console.WriteLine();
+
+int codigosValidos = 0;
+int codigosInvalidos = 0;
+
+string[] sistemaAntigo = { "BICA-014", "BICA-002", "BICA-014", "BICA-030" };
+List<string> sistemaNovo = new List<string> { "BICA-030", "BICA-055", "XX-009" };
+
+List<string> sistemaUnificado = new List<string>();
+
+sistemaUnificado.AddRange(sistemaAntigo);
+sistemaUnificado.AddRange(sistemaNovo);
+
+List<string> sistemaUnicos = new List<string>();
+
+foreach (string codigo in sistemaUnificado)
+{
+    if (!sistemaUnicos.Contains(codigo))
+        sistemaUnicos.Add(codigo);
+}
+
+sistemaUnicos.Sort();
+
+for (int i = 0; i < sistemaUnicos.Count(); i++)
+{
+    if (!sistemaUnicos[i].StartsWith("BICA-") || string.IsNullOrEmpty(sistemaUnicos[i]))
+    {
+        codigosInvalidos++;
+        sistemaUnicos.Remove(sistemaUnicos[i]);
+    } 
+    else
+        codigosValidos++;
+}
+
+if (codigosValidos == 0)
+    Console.WriteLine("O sistema não possui códigos válidos.");
+else
+{
+    foreach (string codigo in sistemaUnicos)
+        Console.WriteLine(codigo);
+    Console.WriteLine();
+
+    Console.WriteLine($"Códigos únicos no cadastro: {sistemaUnicos.Count()}");
+    Console.WriteLine($"Códigos válidos no cadastro: {codigosValidos}");
+    Console.WriteLine($"Códigos inválidos no cadastro: {codigosInvalidos}");
+}
+
 enum FormasPagamento
 {
     Dinheiro = 1,
