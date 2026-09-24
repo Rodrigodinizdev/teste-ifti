@@ -1,0 +1,47 @@
+# ==========================================
+# .NET / C#
+# ==========================================
+
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.userprefs
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Logs
+*.log
+
+# ==========================================
+# Sistema operacional
+# ==========================================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# ==========================================
+# Arquivos temporários
+# ==========================================
+
+*.tmp
+*.temp
