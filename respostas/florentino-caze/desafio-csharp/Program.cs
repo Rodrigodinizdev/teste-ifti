@@ -181,6 +181,39 @@ else
     Console.WriteLine($"Códigos inválidos no cadastro: {codigosInvalidos}");
 }
 
+// --- PARTE 3: PRIORIDADE VETERINARIA ---
+Console.WriteLine("=== PRIORIDADE VETERINÁRIA");
+Console.WriteLine();
+
+List<string> animaisMonitorados = new List<string> { "Leao Simba", "Tartaruga Flora", "Arara Bela", "Onça Preta" };
+List<int> diasSemCheckup = new List<int> { 45, 120, 10, 95 };
+string[] especiesSensiveis = { "Onça Preta", "Arara Bela" };
+
+for (int i = 0; i < animaisMonitorados.Count(); i++)
+{
+    Console.Write($"{animaisMonitorados[i]}: {diasSemCheckup[i]} dias sem checkup ");
+
+    if (diasSemCheckup[i] > 30)
+    {
+        if (especiesSensiveis.Contains(animaisMonitorados[i]) || diasSemCheckup[i] > 90)
+            Console.Write("- Urgente");
+        else
+            Console.Write("- Rotina");
+    } 
+    else
+        Console.Write("- Rotina");
+
+    Console.WriteLine();
+}
+Console.WriteLine();
+
+int indiceAnimal = animaisMonitorados.IndexOf("Tartaruga Flora");
+
+diasSemCheckup[indiceAnimal] = 0;
+
+Console.WriteLine($"Checkup realizado em: {animaisMonitorados[indiceAnimal]}");
+Console.WriteLine($"Dias sem checkup (atualizado): {diasSemCheckup[indiceAnimal]}");
+
 enum FormasPagamento
 {
     Dinheiro = 1,
